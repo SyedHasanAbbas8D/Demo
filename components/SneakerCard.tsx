@@ -2,10 +2,8 @@
 
 import React from 'react';
 import { Card, CardBody, CardFooter } from "@heroui/react";
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
-import { ThreeModel } from './Sneaker/ThreeModel';
-import { gsap } from "gsap";
+import dynamic from "next/dynamic";
+const SneakerCanvas = dynamic(() => import("./Sneaker/SneakerCanvas"), { ssr: false });
 
 interface SneakerCardProps {
   title: string;
@@ -66,35 +64,7 @@ export const SneakerCard: React.FC<SneakerCardProps> = ({ title, price, model })
     >
       <CardBody className="overflow-visible p-0 flex-1">
         <div ref={imageRef} className="w-full h-60">
-          <Canvas
-            key={title}
-            camera={{ position: [0, 2, 4], fov: 25 }}
-          >
-            <ambientLight intensity={1} />
-            <spotLight
-              position={[5, 5, 5]}
-              angle={0.3}
-              penumbra={1}
-              intensity={0.5}
-              castShadow
-            />
-            <spotLight
-              position={[-5, 5, -5]}
-              angle={0.3}
-              penumbra={1}
-              intensity={0.3}
-              castShadow
-            />
-            <ThreeModel model={model} />
-            <OrbitControls
-              enableZoom={false}
-              minPolarAngle={Math.PI / 4}
-              maxPolarAngle={Math.PI / 2}
-              enablePan={false}
-              autoRotate
-              autoRotateSpeed={1}
-            />
-          </Canvas>
+          <SneakerCanvas model={model} title={title} />
         </div>
       </CardBody>
       <CardFooter className="text-small flex flex-col items-start">

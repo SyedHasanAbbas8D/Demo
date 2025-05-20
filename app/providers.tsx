@@ -1,6 +1,6 @@
 "use client";
 
-import type { ThemeProviderProps } from "next-themes";
+import { ThemeProvider } from "next-themes";
 
 import * as React from "react";
 import { HeroUIProvider } from "@heroui/system";
@@ -9,7 +9,7 @@ import { ThemeProvider as NextThemesProvider } from "next-themes";
 
 export interface ProvidersProps {
   children: React.ReactNode;
-  themeProps?: ThemeProviderProps;
+  themeProps?: React.ComponentProps<typeof NextThemesProvider>;
 }
 
 declare module "@react-types/shared" {

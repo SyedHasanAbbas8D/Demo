@@ -41,6 +41,7 @@ export const ThreeModel: React.FC<ThreeModelProps> = ({ model }) => {
           object={scene} 
           scale={4}
           position={[0, -0.5, 0]}
+          rotation={[0, Math.PI / 8, 0]} // Lighter rotation
         />
       </group>
     // </Canvas>

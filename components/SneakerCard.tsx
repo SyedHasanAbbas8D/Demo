@@ -6,13 +6,12 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { ThreeModel } from './Sneaker/ThreeModel';
 import { gsap } from "gsap";
-import Scene from './Sneaker/Scene';
 
 interface SneakerCardProps {
   title: string;
   price: string;
   image: string;
-  model: string; // Add this line
+  model: string;
 }
 
 export const SneakerCard: React.FC<SneakerCardProps> = ({ title, price, model }) => {
@@ -32,59 +31,19 @@ export const SneakerCard: React.FC<SneakerCardProps> = ({ title, price, model })
     const price = priceRef.current;
 
     const handleMouseEnter = () => {
-      gsap.to(card, {
-        y: -10,
-        duration: 0.3,
-        ease: "power2.out"
-      });
-      gsap.to(image, {
-        scale: 1.1,
-        duration: 0.3,
-        ease: "power2.out"
-      });
-      gsap.to(footer, {
-        y: -5,
-        duration: 0.3,
-        ease: "power2.out"
-      });
-      gsap.to(title, {
-        y: -2,
-        duration: 0.3,
-        ease: "power2.out"
-      });
-      gsap.to(price, {
-        y: -2,
-        duration: 0.3,
-        ease: "power2.out"
-      });
+      gsap.to(card, { y: -10, duration: 0.3, ease: "power2.out" });
+      gsap.to(image, { scale: 1.1, duration: 0.3, ease: "power2.out" });
+      gsap.to(footer, { y: -5, duration: 0.3, ease: "power2.out" });
+      gsap.to(title, { y: -2, duration: 0.3, ease: "power2.out" });
+      gsap.to(price, { y: -2, duration: 0.3, ease: "power2.out" });
     };
 
     const handleMouseLeave = () => {
-      gsap.to(card, {
-        y: 0,
-        duration: 0.3,
-        ease: "power2.out"
-      });
-      gsap.to(image, {
-        scale: 1,
-        duration: 0.3,
-        ease: "power2.out"
-      });
-      gsap.to(footer, {
-        y: 0,
-        duration: 0.3,
-        ease: "power2.out"
-      });
-      gsap.to(title, {
-        y: 0,
-        duration: 0.3,
-        ease: "power2.out"
-      });
-      gsap.to(price, {
-        y: 0,
-        duration: 0.3,
-        ease: "power2.out"
-      });
+      gsap.to(card, { y: 0, duration: 0.3, ease: "power2.out" });
+      gsap.to(image, { scale: 1, duration: 0.3, ease: "power2.out" });
+      gsap.to(footer, { y: 0, duration: 0.3, ease: "power2.out" });
+      gsap.to(title, { y: 0, duration: 0.3, ease: "power2.out" });
+      gsap.to(price, { y: 0, duration: 0.3, ease: "power2.out" });
     };
 
     card.addEventListener("mouseenter", handleMouseEnter);
@@ -97,7 +56,6 @@ export const SneakerCard: React.FC<SneakerCardProps> = ({ title, price, model })
   }, []);
 
   return (
-    
     <Card
       ref={cardRef}
       isPressable
@@ -106,11 +64,11 @@ export const SneakerCard: React.FC<SneakerCardProps> = ({ title, price, model })
         bg-white text-black 
         dark:bg-blue-900 dark:text-blue-100"
     >
-      <CardBody ref={imageRef} className="overflow-visible p-0 flex-1">
-        <div className="w-full h-60">
+      <CardBody className="overflow-visible p-0 flex-1">
+        <div ref={imageRef} className="w-full h-60">
           <Canvas
-            key={title} // Ensures each canvas is unique
-            camera={{ position: [0, 2, 4], fov: 25 }} // Better camera position
+            key={title}
+            camera={{ position: [0, 2, 4], fov: 25 }}
           >
             <ambientLight intensity={1} />
             <spotLight
@@ -139,9 +97,11 @@ export const SneakerCard: React.FC<SneakerCardProps> = ({ title, price, model })
           </Canvas>
         </div>
       </CardBody>
-      <CardFooter ref={footerRef} className="text-small flex flex-col items-start">
-        <b ref={titleRef}>{title}</b>
-        <p ref={priceRef} className="text-default-500">{price}</p>
+      <CardFooter className="text-small flex flex-col items-start">
+        <div ref={footerRef} className="w-full flex flex-col items-start">
+          <b ref={titleRef}>{title}</b>
+          <p ref={priceRef} className="text-default-500">{price}</p>
+        </div>
       </CardFooter>
     </Card>
   );

@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { extend } from '@react-three/fiber'
-import { useGLTF, OrbitControls } from '@react-three/drei';
+import { extend, useLoader } from '@react-three/fiber'
+import { useGLTF, OrbitControls, GLTFLoader } from '@react-three/drei';
 
 extend({
   OrbitControls: OrbitControls,
@@ -30,6 +30,8 @@ export const ThreeModel: React.FC<ThreeModelProps> = ({ model }) => {
       groupRef.current.rotation.y += delta * 0.5;
     }
   });
+
+  const gltf = useLoader(GLTFLoader, path);
 
   return (
     // <Canvas>

@@ -1,11 +1,6 @@
 import React, { useRef } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { extend, useLoader } from '@react-three/fiber'
-import { useGLTF, OrbitControls, GLTFLoader } from '@react-three/drei';
-
-extend({
-  OrbitControls: OrbitControls,
-});
+import { useFrame } from '@react-three/fiber';
+import { useGLTF, OrbitControls } from '@react-three/drei';
 
 interface ThreeModelProps {
   model: string; // e.g., 'sneaker1', 'sneaker2', etc.
@@ -31,23 +26,14 @@ export const ThreeModel: React.FC<ThreeModelProps> = ({ model }) => {
     }
   });
 
-  const gltf = useLoader(GLTFLoader, path);
-
   return (
-    // <Canvas>
-      // <OrbitControls />
-      // <ambientLight intensity={0.5} />
-      // <directionalLight position={[10, 10, 10]} intensity={1} />
-      <group ref={groupRef}>
-        <primitive 
-          object={scene} 
-          scale={4}
-          position={[0, -0.5, 0]}
-          rotation={[0, Math.PI / 8, 0]} // Lighter rotation
-        />
-      </group>
-    // </Canvas>
+    <group ref={groupRef}>
+      <primitive 
+        object={scene} 
+        scale={4}
+        position={[0, -0.5, 0]}
+        rotation={[0, Math.PI / 8, 0]} // Lighter rotation
+      />
+    </group>
   );
 };
-
-// Example usage in a parent component
